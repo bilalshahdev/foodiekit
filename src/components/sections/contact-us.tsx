@@ -1,57 +1,66 @@
 "use client";
 
-import { contact, locations } from "@/config/data/contact";
+import { motion } from "framer-motion";
+import { contact } from "@/config/data/contact";
 import { FaPhone, FaEnvelope } from "react-icons/fa";
 import Container from "../container";
-import { Small } from "../ui/typography";
+import { Heading, Small } from "../ui/typography";
 
 const ContactUsSection = () => {
   return (
     <Container id="contact-us" className="py-16">
-      <div className="text-center mb-12">
-        <h3 className="text-3xl font-semibold">Contact Us</h3>
-        <Small className="mt-4 mb-4 block">
+      <motion.div
+        className="text-center mb-12"
+        initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        <Heading className="mb-4">Contact Us</Heading>
+        <Small className="mb-4 block">
           Reach out to us for any inquiries, feedback, or collaboration
           opportunities.
         </Small>
-      </div>
+      </motion.div>
 
-      {/* Contact Info */}
       <div className="flex justify-center gap-8 mb-8">
-        <div className="flex items-center">
+        <motion.div 
+          className="flex items-center"
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
           <FaEnvelope size={20} className="mr-2" />
           <span>{contact.email}</span>
-        </div>
-        <div className="flex items-center">
+        </motion.div>
+
+        <motion.div 
+          className="flex items-center"
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
           <FaPhone size={20} className="mr-2" />
           <span>{contact.phone}</span>
-        </div>
+        </motion.div>
       </div>
 
-      {/* Locations */}
-      <div className="mb-8">
-        <h4 className="text-xl font-semibold">Our Locations</h4>
-        <ul>
-          {locations.map((location, idx) => (
-            <li
-              key={idx}
-              className="mb-2"
-            >{`${location.name}: ${location.address}`}</li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Social Media */}
       <div className="flex justify-center gap-6">
         {contact.socialLinks.map((social, idx) => (
-          <a
+          <motion.a
             key={idx}
             href={social.link}
             target="_blank"
             rel="noopener noreferrer"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: idx * 0.1 }}
+            viewport={{ once: true }}
           >
             <social.icon size={30} />
-          </a>
+          </motion.a>
         ))}
       </div>
     </Container>

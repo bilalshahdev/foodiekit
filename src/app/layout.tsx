@@ -5,6 +5,7 @@ import Providers from "@/components/providers";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { poppins } from "@/lib/fonts";
+import ScrollToTop from "@/components/scroll-to-top";
 
 export const metadata: Metadata = {
   title: "FoodieKitchen",
@@ -23,6 +24,7 @@ export default function RootLayout({
       >
         <Providers>
           <Navbar />
+          <ScrollToTop />
           <main className="flex-1">{children}</main>
           <Footer />
         </Providers>

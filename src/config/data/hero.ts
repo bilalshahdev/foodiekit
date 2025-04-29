@@ -13,12 +13,12 @@ export const description =
 export const cta: CTA[] = [
   {
     label: "Join our waitlist",
-    variant: "default",
+    variant: "secondary",
     link: "#",
   },
   {
     label: "Become a Vendor or Chef",
-    variant: "outline",
+    variant: "signature",
     link: "#",
   },
 ];
