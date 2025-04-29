@@ -4,6 +4,7 @@ import { footerLinks, companyInfo } from "@/config/data/footer";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import Container from "./container";
 import Brand from "./brand";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -11,7 +12,7 @@ const Footer = () => {
       <Container>
         <div className="flex justify-between items-center mb-6">
           <div>
-            <Brand/>
+            <Brand />
             <p className="mt-2 text-sm">
               Bringing Fresh Ingredients to Your Doorstep
             </p>
@@ -38,9 +39,12 @@ const Footer = () => {
             <ul className="mt-2">
               {footerLinks.map((link, idx) => (
                 <li key={idx}>
-                  <a href={link.link} className="text-sm hover:text-blue-400">
+                  <Link
+                    href={link.link}
+                    className="text-sm hover:text-blue-400"
+                  >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

@@ -6,6 +6,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { poppins } from "@/lib/fonts";
 import ScrollToTop from "@/components/scroll-to-top";
+import TopLoader from "@/components/top-loader";
 
 export const metadata: Metadata = {
   title: "FoodieKitchen",
@@ -23,6 +24,7 @@ export default function RootLayout({
         className={`${poppins.className} antialiased flex flex-col min-h-screen`}
       >
         <Providers>
+          <TopLoader />
           <Navbar />
           <ScrollToTop />
           <main className="flex-1">{children}</main>

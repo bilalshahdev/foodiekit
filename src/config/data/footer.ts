@@ -1,5 +1,9 @@
 export const footerLinks = [
   {
+    name: "Legal Disclaimer",
+    link: "/legal-disclaimer", // Change to the appropriate link
+  },
+  {
     name: "Terms & Conditions",
     link: "/terms-conditions", // Change to the appropriate link
   },

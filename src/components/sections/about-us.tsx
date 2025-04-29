@@ -18,7 +18,7 @@ const AboutUsSection = () => {
         <Image
           src={img2}
           alt="About us"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-2xl"
         />
         <div>
           {aboutData.map((section, idx) => (
