@@ -6,43 +6,23 @@ import { MdOutlineArrowBack, MdOutlineArrowBackIosNew } from "react-icons/md";
 import Container from "./container";
 import { Button } from "./ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import { Heading } from "./ui/typography";
+import { cn } from "@/lib/utils";
 
-export const PageTitle = ({ title }: { title: string }) => {
+export const PageTitle = ({
+  title,
+  className,
+}: {
+  title: string;
+  className?: string;
+}) => {
   const router = useRouter();
   const shadow = false;
 
   return (
-    <Container className="h-14">
-      {/* Back Button */}
-      <div className="flex items-center w-ful h-full gap-4 md:gap-8 capitalize">
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant={"secondary"}
-              onClick={() => router.back()}
-              className="text-foreground px-2"
-            >
-              <MdOutlineArrowBack
-                size={24}
-              />
-              {/* <MdOutlineArrowBack
-                size={24}
-                className="hidden md:inline-block"
-              />
-              <MdOutlineArrowBackIosNew
-                size={24}
-                className="inline-block md:hidden"
-              /> */}
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent align="start">
-            <p className="text-muted-foreground">Go Back</p>
-          </TooltipContent>
-        </Tooltip>
-
-        <h3 className="h3 md:h4 font-medium w-ful text-center">{title}</h3>
-      </div>
-    </Container>
+    <Heading className={cn("mb-4 mx-auto text-center", className)}>
+      {title}
+    </Heading>
   );
 };
 
