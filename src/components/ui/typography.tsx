@@ -8,7 +8,7 @@ const typographyVariants = cva("", {
       // Headings
       heading: "font-antonio text-2xl font-bold leading-tight md:text-4xl bg-gradient-to-br from-signature via-signature to-primary text-transparent bg-clip-text",
       subheading: "font-antonio text-xl font-semibold leading-snug md:text-3xl",
-      h1: "font-antonio text-4xl font-bold leading-tight md:text-5xl lg:text-6xl",
+      h1: "font-antonio text-4xl font-bold leading-tight md:text-5xl",
       h2: "font-antonio text-3xl font-bold leading-tight md:text-4xl",
       h3: "font-antonio text-2xl font-bold leading-tight md:text-3xl",
       h4: "font-antonio text-xl font-semibold leading-snug md:text-2xl",

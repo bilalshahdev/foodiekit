@@ -2,10 +2,10 @@ import { ButtonVariants } from "@/components/ui/button";
 
 import img1 from "../../../public/images/img1.webp";
 import img2 from "../../../public/images/img2.webp";
-import img3 from "../../../public/images/img3.webp";
+import img3 from "../../../public/images/img3.jpg";
 import img4 from "../../../public/images/img4.webp";
 
-export const HeroImages = [img1, img2, img3, img4];
+export const HeroImages = [img1, img2,img3, img4];
 export const tagline =
   "Redefining Food Access with Smart Kitchens & Farm-Fresh Ingredients";
 export const description =

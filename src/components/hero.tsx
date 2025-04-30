@@ -9,7 +9,7 @@ import {
 import { cta, description, HeroImages, tagline } from "@/config/data/hero";
 import Image from "next/image";
 import Link from "next/link";
-import { H2, H4 } from "./ui/typography";
+import { H1, H2, H4 } from "./ui/typography";
 import { motion } from "framer-motion";
 
 const Hero = () => {
@@ -26,7 +26,7 @@ const Hero = () => {
           <CarouselContent>
             {HeroImages.map((image, idx) => (
               <CarouselItem key={idx} className="w-full">
-                <div className="w-full h-[60vh] md:h-[600px] relative">
+                <div className="w-full h-[90vh] md:h-[600px] relative">
                   <Image
                     src={image}
                     alt={`Banner ${idx + 1}`}
@@ -45,8 +45,8 @@ const Hero = () => {
       </div>
 
       {/* Glassmorphism Text Overlay */}
-      <div className="relative z-10 w-full flex justify-center items-center min-h-[260px] md:min-h-[600px]">
-        <motion.div
+      <div className="relative z-10 w-full flex justify-center items-center h-[90vh] md:h-[600px]">
+        {/* <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: "easeOut" }}
@@ -59,6 +59,12 @@ const Hero = () => {
             mx-auto flex flex-col items-center text-center
             rounded-xl
           "
+        > */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
+          className="p-8 md:p-14 max-w-screen-lg flex flex-col mr-auto"
         >
           {/* Animated Tagline */}
           <motion.div
@@ -66,9 +72,9 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.7 }}
           >
-            <H2 className="text-white font-bold text-2xl sm:text-3xl md:text-5xl tracking-tight drop-shadow-lg mb-2 sm:mb-3">
+            <H1 className="text-white font-bold drop-shadow-lg mb-2 sm:mb-3">
               {tagline}
-            </H2>
+            </H1>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -84,15 +90,10 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.6, duration: 0.5 }}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full justify-center"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full"
           >
             {cta.map((item, idx) => (
-              <Button
-                key={idx}
-                variant={item.variant}
-                size="lg"
-                asChild
-              >
+              <Button key={idx} variant={item.variant} size="lg" asChild>
                 <Link href={item.link}>{item.label}</Link>
               </Button>
             ))}

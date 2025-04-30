@@ -6,7 +6,7 @@ import HowItWorksSection from "@/components/sections/how-it-works";
 import NewsletterSignUpSection from "@/components/sections/newsletter";
 export default function Home() {
   return (
-    <div className="text-justify">
+    <div>
       <Hero />
       <AboutUsSection />
       <HowItWorksSection />

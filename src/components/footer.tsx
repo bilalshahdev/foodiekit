@@ -59,7 +59,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-semibold">Our Locations</h4>
+            <h4 className="font-semibold">Our Cloud Kitchen Locations</h4>
             <ul className="mt-2">
               {companyInfo.locations.map((location, idx) => (
                 <li key={idx}>
@@ -71,7 +71,7 @@ const Footer = () => {
         </div>
 
         <div className="text-center text-sm">
-          <p>© {new Date().getFullYear()} FoodieKit. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} FoodieKit Nig Ltd. All rights reserved.</p>
         </div>
       </Container>
     </div>
