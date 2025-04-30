@@ -122,10 +122,12 @@ const Menu = () => {
                   <Label
                     key={item.id}
                     onClick={() => {
-                      item.id === "home"
-                        ? window.scrollTo({ top: 0, behavior: "smooth" })
-                        : handleScrollToSection(item.id);
-                      setMobileMenuOpen(false); // close menu on click
+                      if (item.id === "home") {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      } else {
+                        handleScrollToSection(item.id);
+                      }
+                      setMobileMenuOpen(false);
                     }}
                     className={cn(
                       "capitalize cursor-pointer text-background",
