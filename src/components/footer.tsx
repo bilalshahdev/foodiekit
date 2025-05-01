@@ -5,10 +5,11 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import Container from "./container";
 import Brand from "./brand";
 import Link from "next/link";
+import { XSmall } from "./ui/typography";
 
 const Footer = () => {
   return (
-    <div className="bg-foreground text-white py-16">
+    <div className="bg-foreground text-white py-8">
       <Container>
         <div className="flex justify-between items-center mb-6">
           <div>
@@ -17,7 +18,7 @@ const Footer = () => {
               Bringing Fresh Ingredients to Your Doorstep
             </p>
           </div>
-          <div className="flex gap-6">
+          {/* <div className="flex gap-6">
             {companyInfo.socialLinks.map((social, idx) => (
               <a
                 key={idx}
@@ -30,47 +31,47 @@ const Footer = () => {
                 {social.name === "Instagram" && <FaInstagram size={20} />}
               </a>
             ))}
-          </div>
+          </div> */}
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <div>
-            <h4 className="font-semibold">Quick Links</h4>
-            <ul className="mt-2">
+            <h4 className="font-semibold mb-2">Quick Links</h4>
+            <div className="flex flex-col gap-4">
               {footerLinks.map((link, idx) => (
-                <li key={idx}>
+                <XSmall key={idx}>
                   <Link
                     href={link.link}
                     className="text-sm hover:text-blue-400"
                   >
                     {link.name}
                   </Link>
-                </li>
+                </XSmall>
               ))}
-            </ul>
+            </div>
           </div>
 
-          <div>
+          {/* <div>
             <h4 className="font-semibold">Contact</h4>
-            <ul className="mt-2">
-              <li>Email: {companyInfo.email}</li>
-              <li>Phone: {companyInfo.phone}</li>
-            </ul>
-          </div>
+            <div className="mt-2 flex flex-col gap-2">
+              <XSmall>Email {companyInfo.email}</XSmall>
+              <XSmall>Phone {companyInfo.phone}</XSmall>
+            </div>
+          </div> */}
 
           <div>
             <h4 className="font-semibold">Our Cloud Kitchen Locations</h4>
-            <ul className="mt-2">
+            <div className="mt-2 flex flex-col gap-2">
               {companyInfo.locations.map((location, idx) => (
-                <li key={idx}>
+                <XSmall key={idx}>
                   {location.name}: {location.address}
-                </li>
+                </XSmall>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
 
-        <div className="text-center text-sm">
+        <div className="text-center text-sm mt-16 text-muted-foreground">
           <p>© {new Date().getFullYear()} FoodieKit Nig Ltd. All rights reserved.</p>
         </div>
       </Container>

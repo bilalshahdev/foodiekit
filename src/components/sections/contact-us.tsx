@@ -17,13 +17,13 @@ const ContactUsSection = () => {
         viewport={{ once: true }}
       >
         <Heading className="mb-4">Contact Us</Heading>
-        <Small className="mb-4 block">
+        <Small className="block">
           Reach out to us for any inquiries, feedback, or collaboration
           opportunities.
         </Small>
       </motion.div>
 
-      <div className="flex justify-center gap-8 mb-8">
+      <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-8 mb-8">
         <motion.div 
           className="flex items-center"
           initial={{ opacity: 0, x: -20 }}
@@ -32,7 +32,7 @@ const ContactUsSection = () => {
           viewport={{ once: true }}
         >
           <FaEnvelope size={20} className="mr-2" />
-          <span>{contact.email}</span>
+          <Small>{contact.email}</Small>
         </motion.div>
 
         <motion.div 
@@ -43,7 +43,7 @@ const ContactUsSection = () => {
           viewport={{ once: true }}
         >
           <FaPhone size={20} className="mr-2" />
-          <span>{contact.phone}</span>
+          <Small>{contact.phone}</Small>
         </motion.div>
       </div>
 
