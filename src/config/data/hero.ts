@@ -1,11 +1,11 @@
 import { ButtonVariants } from "@/components/ui/button";
 
-import img1 from "../../../public/images/img1.webp";
-import img2 from "../../../public/images/img2.webp";
-import img3 from "../../../public/images/img3.jpg";
-import img4 from "../../../public/images/img4.webp";
-
-export const HeroImages = [img1, img2,img3, img4];
+export const HeroImages = [
+  "/images/img1.webp",
+  "/images/img2.webp",
+  "/images/img3.jpg",
+  "/images/img4.webp",
+];
 export const tagline =
   "Redefining Food Access with Smart Kitchens & Farm-Fresh Ingredients";
 export const description =
@@ -14,7 +14,7 @@ export const cta: CTA[] = [
   {
     label: "Join our waitlist",
     variant: "secondary",
-    link: "#",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSeepT2Q1ttNPNwsJiwyjtRXKJspW88IUygnESv_z3JaO-rBzQ/viewform",
   },
   {
     label: "Become a Vendor or Chef",

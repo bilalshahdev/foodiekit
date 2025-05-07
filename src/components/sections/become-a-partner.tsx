@@ -4,8 +4,6 @@ import becomePartnerData from "@/config/data/become-partner";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
-import partner from "../../../public/images/partner.png";
-import delivery from "../../../public/images/delivery.jpg";
 import Container from "../container";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -26,7 +24,9 @@ const BecomePartnerSection = () => {
     setSelectedRole(value);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -37,10 +37,11 @@ const BecomePartnerSection = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const googleFormUrl = "https://docs.google.com/forms/d/e/your-form-id/formResponse";
-    
+    const googleFormUrl =
+      "https://docs.google.com/forms/d/e/your-form-id/formResponse";
+
     const form = new FormData();
-    form.append("entry.123456", selectedRole);  // The field name for the selected role in your Google Form
+    form.append("entry.123456", selectedRole); // The field name for the selected role in your Google Form
     form.append("entry.654321", formData.name); // The field name for the name in your Google Form
     form.append("entry.789012", formData.email); // The field name for the email in your Google Form
     form.append("entry.345678", formData.phone); // The field name for the phone number in your Google Form
@@ -81,9 +82,11 @@ const BecomePartnerSection = () => {
           {/* Form Start */}
           <div className="">
             <Image
-              src={delivery}
+              src={"/images/delivery.jpg"}
               alt="Become a partner"
               className="w-full h-full object-cover rounded-2xl"
+              width={1000}
+              height={1000}
             />
           </div>
           <div className="space-y-6">

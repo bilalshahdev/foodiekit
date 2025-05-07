@@ -1,5 +1,4 @@
 import Image from "next/image";
-import logo from "../../public/images/logo.png";
 
 const Brand = () => {
   const handleScrollToTop = () => {
@@ -10,7 +9,7 @@ const Brand = () => {
       onClick={handleScrollToTop}
       className="flex items-center gap-2 cursor-pointer h-full "
     >
-      <Image src={logo} alt="Foodie" width={100} height={100} />
+      <Image src={"/images/logo.png"} alt="Foodie" width={100} height={100} />
     </button>
   );
 };

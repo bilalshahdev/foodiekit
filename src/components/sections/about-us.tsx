@@ -4,11 +4,10 @@
 
 import aboutData from "@/config/data/about";
 import { motion } from "framer-motion";
-import Container from "../container";
-import { H5, H6, Heading, Paragraph, Small, XSmall } from "../ui/typography";
-import { PageTitle } from "../titles";
-import img2 from "../../../public/images/img2.webp";
 import Image from "next/image";
+import Container from "../container";
+import { PageTitle } from "../titles";
+import { H6, Small, XSmall } from "../ui/typography";
 
 const AboutUsSection = () => {
   return (
@@ -16,9 +15,11 @@ const AboutUsSection = () => {
       <PageTitle title="About us" className="mb-8" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <Image
-          src={img2}
+          src={"/images/img2.webp"}
           alt="About us"
           className="w-full h-full object-cover rounded-2xl"
+          width={1000}
+          height={1000}
         />
         <div>
           {aboutData.map((section, idx) => (
