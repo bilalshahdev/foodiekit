@@ -7,10 +7,10 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { cta, description, HeroImages, tagline } from "@/config/data/hero";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { H1, H2, H4 } from "./ui/typography";
-import { motion } from "framer-motion";
+import { H4, H6, XSmall } from "./ui/typography";
 
 const Hero = () => {
   if (!HeroImages || HeroImages.length === 0) return null;
@@ -18,7 +18,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative w-full min-h-[60vh] flex items-center justify-center"
+      className="relative w-full flex items-center justify-center"
     >
       {/* Carousel with gradient overlay */}
       <div className="absolute inset-0 z-0">
@@ -26,7 +26,7 @@ const Hero = () => {
           <CarouselContent>
             {HeroImages.map((image, idx) => (
               <CarouselItem key={idx} className="w-full">
-                <div className="w-full h-[90vh] md:h-[600px] relative">
+                <div className="w-full h-72 md:h-[600px] relative">
                   <Image
                     src={image}
                     alt={`Banner ${idx + 1}`}
@@ -45,21 +45,7 @@ const Hero = () => {
       </div>
 
       {/* Glassmorphism Text Overlay */}
-      <div className="relative z-10 w-full flex justify-center items-center h-[90vh] md:h-[600px]">
-        {/* <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
-          className="
-            backdrop-blur
-            bg-black/30
-            border border-white/20
-            p-8 md:p-14
-            w-[95vw] max-w-xl md:max-w-3xl
-            mx-auto flex flex-col items-center text-center
-            rounded-xl
-          "
-        > */}
+      <div className="relative z-10 w-full flex justify-center items-center h-72 md:h-[600px]">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -72,29 +58,29 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.7 }}
           >
-            <H1 className="text-white font-bold drop-shadow-lg mb-2 sm:mb-3">
-              {tagline}
-            </H1>
+            <H4 className="text-white drop-shadow-lg mb-2">{tagline}</H4>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.7 }}
           >
-            <H4 className="text-white/90 text-base sm:text-lg md:text-xl font-medium mb-4 sm:mb-6">
+            <H6 className="text-white font-normal mb-4 sm:mb-6">
               {description}
-            </H4>
+            </H6>
           </motion.div>
           {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.6, duration: 0.5 }}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full"
+            className="flex flex-co gap-3 sm:gap-4 w-full"
           >
             {cta.map((item, idx) => (
-              <Button key={idx} variant={item.variant} size="lg" asChild>
-                <Link href={item.link}>{item.label}</Link>
+              <Button key={idx} variant={item.variant} asChild>
+                <Link href={item.link} target="_blank">
+                  <XSmall>{item.label}</XSmall>
+                </Link>
               </Button>
             ))}
           </motion.div>

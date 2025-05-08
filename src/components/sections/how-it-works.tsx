@@ -9,7 +9,7 @@ import { H6, Heading, Small } from "../ui/typography";
 const HowItWorksSection = () => {
   return (
     <Container id="how-it-works" className="max-w-full py-16 bg-muted">
-      <Container>
+      <div>
         <motion.div
           className="text-center mb-8"
           initial={{ opacity: 0, y: -20 }}
@@ -39,7 +39,7 @@ const HowItWorksSection = () => {
             </motion.div>
           ))}
         </div>
-      </Container>
+      </div>
     </Container>
   );
 };

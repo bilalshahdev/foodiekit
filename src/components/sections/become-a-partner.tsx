@@ -1,67 +1,122 @@
 "use client";
 
 import becomePartnerData from "@/config/data/become-partner";
+import validate from "@/utils/validateData";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 import Container from "../container";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { Label } from "../ui/label"; // Importing ShadCN Label component
-import { Textarea } from "../ui/textarea";
-import { H6, Heading, Small } from "../ui/typography";
+import { Label } from "../ui/label";
+import { H6, Heading, Small, XSmall } from "../ui/typography";
 
 const BecomePartnerSection = () => {
-  const [selectedRole, setSelectedRole] = useState("");
-  const [formData, setFormData] = useState({
+  const [data, setData] = useState<Data>({
     name: "",
     email: "",
     phone: "",
     about: "",
+    role: "",
   });
 
-  const handleRoleChange = (value: string) => {
-    setSelectedRole(value);
-  };
+  const [errors, setErrors] = useState<FormErrors>({
+    name: "",
+    email: "",
+    phone: "",
+    about: "",
+    role: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    const updatedData = { ...data, [name]: value };
+    setData(updatedData);
+
+    const validationErrors = validate(updatedData);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: validationErrors[name as keyof typeof validationErrors],
+    }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleRoleSelect = (role: string) => {
+    const updatedData = { ...data, role };
+    setData(updatedData);
+    const validationErrors = validate(updatedData);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      role: validationErrors.role,
+    }));
+  };
+
+  const formFields = [
+    { name: "name", label: "Your Name", placeholder: "Enter your name" },
+    {
+      name: "phone",
+      label: "Phone Number",
+      placeholder: "Enter your phone number",
+    },
+    {
+      name: "email",
+      label: "Email Address",
+      placeholder: "Enter your email address",
+    },
+    {
+      name: "about",
+      label: "Tell us about yourself",
+      placeholder: "Tell us about yourself",
+    },
+  ];
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const googleFormUrl =
-      "https://docs.google.com/forms/d/e/your-form-id/formResponse";
+    const errors = validate(data);
+    if (Object.keys(errors).length > 0) {
+      setErrors(errors);
+      return;
+    }
 
-    const form = new FormData();
-    form.append("entry.123456", selectedRole); // The field name for the selected role in your Google Form
-    form.append("entry.654321", formData.name); // The field name for the name in your Google Form
-    form.append("entry.789012", formData.email); // The field name for the email in your Google Form
-    form.append("entry.345678", formData.phone); // The field name for the phone number in your Google Form
-    form.append("entry.987654", formData.about); // The field name for the about section in your Google Form
-
-    fetch(googleFormUrl, {
-      method: "POST",
-      body: form,
-    })
-      .then((response) => {
-        if (response.ok) {
-          alert("Application submitted successfully!");
-        } else {
-          alert("There was an error submitting your application.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error submitting form:", error);
-        alert("Error submitting your application.");
+    setIsSubmitting(true);
+    setSubmitError(null);
+    setSubmitSuccess(null);
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-API-KEY": "my-secret-api-key",
+        },
+        body: JSON.stringify(data),
       });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitSuccess("Your application has been submitted successfully!");
+        setData({
+          name: "",
+          email: "",
+          phone: "",
+          about: "",
+          role: "",
+        });
+      } else {
+        setSubmitError(result.error || "An error occurred, please try again.");
+      }
+    } catch (error) {
+      console.log(error);
+      setSubmitError("An error occurred, please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -73,39 +128,40 @@ const BecomePartnerSection = () => {
         </Small>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 md:gap-8 bg-card dark:bg-muted border border-border dark:border-neutral-700 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer p-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 bg-card dark:bg-muted border border-border dark:border-neutral-700 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer p-8"
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          {/* Form Start */}
-          <div className="">
+          {/* Image */}
+          <div>
             <Image
-              src={"/images/delivery.jpg"}
+              src="/images/delivery.jpg"
               alt="Become a partner"
               className="w-full h-full object-cover rounded-2xl"
               width={1000}
               height={1000}
             />
           </div>
-          <div className="space-y-6">
-            <div className="text-left">
+
+          {/* Form */}
+          <div className="space-y-6 text-left">
+            <div>
               <H6 className="mb-4">I am a:</H6>
               <div className="grid md:grid-cols-2 gap-4">
-                {/* Button-like RadioGroupItem */}
                 {["farmer", "chef", "restaurant", "ghost-kitchen"].map(
                   (role) => (
                     <div
                       key={role}
-                      className={`flex items-center justify-center py-2 px-4 rounded-lg border cursor-pointer transition-colors duration-200 ${
-                        selectedRole === role
-                          ? "border-signature border-2"
-                          : "bg-secondary"
+                      className={`flex items-center justify-center py-2 px-4 rounded-lg transition-colors duration-200 border-2 cursor-pointer ${
+                        data.role === role
+                          ? "border-signature bg-signature"
+                          : "bg-secondary border-transparent"
                       }`}
-                      onClick={() => handleRoleChange(role)}
+                      onClick={() => handleRoleSelect(role)}
                     >
-                      <Label>
+                      <Label className="cursor-pointer">
                         {role.charAt(0).toUpperCase() +
                           role.slice(1).replace("-", " ")}
                       </Label>
@@ -113,60 +169,38 @@ const BecomePartnerSection = () => {
                   )
                 )}
               </div>
+              {errors.role && (
+                <XSmall className="text-red-500 mt-2">{errors.role}</XSmall>
+              )}
             </div>
 
-            <div className="text-left">
-              <H6 className="mb-2">Your Name:</H6>
-              <Input
-                name="name"
-                placeholder="Enter your name"
-                value={formData.name}
+            {/* Form Fields */}
+            {formFields.map((field) => (
+              <InputField
+                key={field.name}
+                {...field}
+                value={data[field.name as keyof Data]}
+                error={errors[field.name as keyof FormErrors] || ""}
                 onChange={handleInputChange}
               />
-            </div>
+            ))}
 
-            <div className="text-left">
-              <H6 className="mb-2">Email Address:</H6>
-              <Input
-                name="email"
-                placeholder="Enter your email"
-                type="email"
-                value={formData.email}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            <div className="text-left">
-              <H6 className="mb-2">Phone Number:</H6>
-              <Input
-                name="phone"
-                placeholder="Enter your phone number"
-                type="tel"
-                value={formData.phone}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            <div className="text-left">
-              <H6 className="mb-2">Tell us about yourself:</H6>
-              <Textarea
-                name="about"
-                placeholder="Share your story or experience"
-                rows={4}
-                value={formData.about}
-                onChange={handleInputChange}
-              />
-            </div>
+            {submitSuccess && (
+              <XSmall className="text-green-500 mt-4">{submitSuccess}</XSmall>
+            )}
+            {submitError && (
+              <XSmall className="text-red-500 mt-4">{submitError}</XSmall>
+            )}
 
             <Button
-              variant={"signature"}
+              variant="signature"
               className="mt-4 w-full"
               onClick={handleSubmit}
+              disabled={isSubmitting}
             >
-              Submit Application
+              {isSubmitting ? "Submitting..." : "Submit Application"}
             </Button>
           </div>
-          {/* Form End */}
         </motion.div>
       </div>
     </Container>
@@ -174,3 +208,33 @@ const BecomePartnerSection = () => {
 };
 
 export default BecomePartnerSection;
+
+interface InputFieldProps {
+  label: string;
+  name: string;
+  placeholder: string;
+  value: string;
+  error: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const InputField = ({
+  label,
+  name,
+  placeholder,
+  value,
+  error,
+  onChange,
+}: InputFieldProps) => (
+  <div>
+    <H6 className="mb-2">{label}:</H6>
+    <Input
+      name={name}
+      value={value}
+      placeholder={placeholder}
+      onChange={onChange}
+      className={error ? "border-red-500" : ""}
+    />
+    {error && <XSmall className="text-red-500">{error}</XSmall>}
+  </div>
+);

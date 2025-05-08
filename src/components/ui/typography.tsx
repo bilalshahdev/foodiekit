@@ -11,9 +11,9 @@ const typographyVariants = cva("", {
       h1: "font-antonio text-4xl font-bold leading-tight md:text-5xl",
       h2: "font-antonio text-3xl font-bold leading-tight md:text-4xl",
       h3: "font-antonio text-2xl font-bold leading-tight md:text-3xl",
-      h4: "font-antonio text-xl font-semibold leading-snug md:text-2xl",
+      h4: "font-antonio text- font-medium md:font-semibold leading-snug md:text-2xl",
       h5: "font-antonio text-lg font-semibold leading-snug md:text-xl",
-      h6: "font-antonio text-base font-semibold leading-snug md:text-lg",
+      h6: "font-antonio  text-sm md:font-semibold leading-snug md:text-lg",
 
       // Special headings
       xxh: "font-antonio text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl leading-none",

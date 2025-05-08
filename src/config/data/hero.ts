@@ -19,7 +19,7 @@ export const cta: CTA[] = [
   {
     label: "Become a Vendor or Chef",
     variant: "signature",
-    link: "#",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSeepT2Q1ttNPNwsJiwyjtRXKJspW88IUygnESv_z3JaO-rBzQ/viewform",
   },
 ];
 

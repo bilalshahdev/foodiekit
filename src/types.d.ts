@@ -20,3 +20,19 @@ interface AppLocation {
   name: string;
   address: string;
 }
+
+interface Data {
+  name: string;
+  email: string;
+  phone: string;
+  about: string;
+  role: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  phone?: string;
+  about?: string;
+  role?: string;
+}
