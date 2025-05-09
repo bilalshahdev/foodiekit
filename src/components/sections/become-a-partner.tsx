@@ -44,6 +44,8 @@ const BecomePartnerSection = () => {
       ...prevErrors,
       [name]: validationErrors[name as keyof typeof validationErrors],
     }));
+    setSubmitError(null);
+    setSubmitSuccess(null);
   };
 
   const handleRoleSelect = (role: string) => {
@@ -54,6 +56,8 @@ const BecomePartnerSection = () => {
       ...prevErrors,
       role: validationErrors.role,
     }));
+    setSubmitError(null);
+    setSubmitSuccess(null);
   };
 
   const formFields = [
@@ -81,6 +85,8 @@ const BecomePartnerSection = () => {
     const errors = validate(data);
     if (Object.keys(errors).length > 0) {
       setErrors(errors);
+      setSubmitError(null);
+      setSubmitSuccess(null);
       return;
     }
 
